@@ -5,70 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Portal</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 1em;
-        }
-        nav a {
-            color: #fff;
-            margin-right: 1em;
-            text-decoration: none;
-        }
-        .content {
-            padding: 2em;
-        }
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+}
+nav a {
+    color: #fff;
+    margin-right: 1em;
+    text-decoration: none;
+}
+.content {
+    padding: 2em;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.table th {
+    background-color: #f4f4f9;
+    text-align: left;
+}
+.gameThumbsBtn {
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 0 5px;
+}
+.like-active {
+    color: green;
+}
+.dislike-active {
+    color: red;
+}
+.language-select {
+    float: right;
+    color: #fff;
+    background: #444;
+    border: none;
+    padding: 0.5em;
+    cursor: pointer;
+}
+.language-select option {
+    background: #333;
+    color: #fff;
+}
+/* Footer styles */
+.footer {
+    background-color: #222;
+    color: #ddd;
+    padding: 1em 2em;
+    text-align: center;
+}
+.footer a {
+    color: #aaa;
+    margin: 0 0.5em;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #fff;
+}
     </style>
 </head>
 <body>
 
 <nav>
+    <a href="#" onclick="loadPage('home')">Home</a>
+    <a href="#" onclick="loadPage('about')">About</a>
     <a href="#" onclick="loadPage('account')">Account</a>
-    <a href="#" onclick="loadPage('login')">Login</a>
-    <a href="#" onclick="loadPage('contact')">Contact</a>
-    <a href="#" onclick="loadPage('register')">Register</a>
-    <a href="#" onclick="loadPage('password')">Forgot Password</a>
-    <a href="#" onclick="loadPage('email_verify')">Email Verify</a>
+    <a href="#" onclick="loadPage('2fa')">Two-Factor Authentication</a>
+    <a href="#" onclick="loadPage('change_password')">Change Password</a>
+    <a href="#" onclick="loadPage('logs')">Logs</a>
+    <a href="#" onclick="loadPage('profile')">Profile</a>
+    <a href="#" onclick="loadPage('games')">Games</a>
+    <a href="#" onclick="loadPage('payments')">Payments</a>
+    <a href="#" onclick="loadPage('docs')">Docs</a>
+    <a href="#" onclick="loadPage('certs')">Update Certs</a>
+    <select class="language-select" id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <!-- Additional languages can be added here -->
+    </select>
 </nav>
 
 <div class="content" id="content">
-    <h1>Welcome to the Game Portal</h1>
-    <p>Select an option from the navigation menu.</p>
+    <h1 id="header-welcome">Welcome to the Game Portal</h1>
+    <p id="description-select">Select an option from the navigation menu.</p>
+</div>
+
+<div class="footer">
+    <p>All rights reserved. Game Portal &copy; 2024. Version: 1.0</p>
+    <a href="#" onclick="loadPage('privacy')">Privacy Policy</a>
+    <a href="#" onclick="loadPage('terms')">Terms and Conditions</a>
+    <a href="#" onclick="loadPage('docs')">Documentation</a>
 </div>
 
 <script>
-    function loadPage(page) {
-        const content = document.getElementById('content');
-        switch (page) {
-            case 'account':
-                content.innerHTML = '<h1>Account Page</h1><p>Manage your account settings here.</p>';
-                break;
-            case 'login':
-                content.innerHTML = '<h1>Login Page</h1><p>Log in to your account here.</p>';
-                break;
-            case 'contact':
-                content.innerHTML = '<h1>Contact Page</h1><p>Get in touch with us here.</p>';
-                break;
-            case 'register':
-                content.innerHTML = '<h1>Register Page</h1><p>Create a new account here.</p>';
-                break;
-            case 'password':
-                content.innerHTML = '<h1>Password Recovery</h1><p>Recover your password here.</p>';
-                break;
-            case 'email_verify':
-                content.innerHTML = '<h1>Email Verification</h1><p>Verify your email here.</p>';
-                break;
-            default:
-                content.innerHTML = '<h1>Welcome to the Game Portal</h1><p>Select an option from the navigation menu.</p>';
-        }
-    }
-</script>
+/* Embedded JavaScript for dynamic functionality */
+const translations = {
+    en: {
+        headerWelcome: "Welcome to the Game Portal",
+        descriptionSelect: "Select an option from the navigation menu.",
+        home: "Home Page",
+        about: "About Us",
+        games: "Games",
+        payments: "Payments",
+        docs: "Documentation",
+        certs: "Update Certificates",
+        twoFA: "Two-Factor Authentication",
+        changePassword: "Change Password",
+        logs: "Logs",
+        profile: "Edit Profile"
+    },
+    // Add other languages here
+};
 
-</body>
-</html>
+function changeLanguage() {
+    const lang = document.getElementById('language').value;
+    document.getElementById('header-welcome').innerText = translations[lang].headerWelcome;
+    document.getElementById('description-select').innerText = translations[lang].descriptionSelect;
+    // Additional text updates can be made here
+}
+
+function loadPage(page) {
+    const content = document.getElementById('content');
+    const lang = document.getElementById('language').value;
+    switch (page) {
+        case 'home':
+            content.innerHTML = `<h1>${translations[lang].home}</h1><p>Welcome to the Game Portal. Enjoy our games and features!</p>`;
+            break;
+        case 'about':
+            content.innerHTML = `<h1>${translations[lang].about}</h1><p>Learn more about our portal and its mission.</p>`;
+            break;
+        case 'games':
+            content.innerHTML = `
+            <h1>${translations[lang].games}</h1>
+            <div>
+                <p>Game 1: <span id="game1-likes">0</span> <i class="fa fa-thumbs-o-up gameThumbsBtn" onclick="likeGame(1)"></i><i class="fa fa-thumbs-o-down gameThumbsBtn" onclick="dislikeGame(1)"></i></p>
+                <p>Game 2: <span id="game2-likes">0</span> <i class="fa fa-thumbs-o-up gameThumbsBtn" onclick="likeGame(2)"></i><i class="fa fa-thumbs-o-down gameThumbsBtn" onclick="dislikeGame(2)"></i></p>
+            </div>`;
+            break;
+        case 'payments':
+            content.innerHTML = `
+            <h1>${translations[lang].payments}</h1>
+            <div>
+                <p><b>Select a Payment Method:</b></p>
+                <button onclick="simulateAdvcash()">Advcash</button>
+                <button onclick="simulatePaytm()">Paytm</button>
+                <button onclick="simulatePayPal()">PayPal</button>
+                <div id="payment-result" style="margin-top:20px;"></div>
+            </div>`;
+            break;
+        case 'docs':
+            content.innerHTML = `
+            <h1>${translations[lang].docs}</h1>
+            <ul>
+                <li><a href="#" onclick="viewDoc('changelog')">Changelog</a></li>
+                <li><a href="#" onclick="viewDoc('license')">License</a></li>
+                <li><a href="#" onclick="viewDoc('code_of_conduct')">Code of Conduct</a></li>
+            </ul>
+            <div id="doc-content" style="margin-top:20px;"></div>`;
+            break;
+        case 'certs':
+            content.innerHTML = `
+            <h1>${translations[lang].certs}</h1>
+            <p>Click below to update certificates for secure connections:</p>
+            <button onclick="updateCerts()">Update Certificates</button>
+            <div id="cert-result" style="margin-top:20px;"></div>`;
+            break;
+        case '2fa':
+            content.innerHTML = `
+            <h1>${translations[lang].twoFA}</h1>
+            <p>Enable or disable two-factor authentication for added security.</p>
+            <form>
+                <label>Enable 2FA: <input type="checkbox"></label><br>
+                <label>Disable 2FA: <input type="checkbox"></label><br>
+                <button>Save Changes</button>
+            </form>`;
+            break;
+        case 'change_password':
+            content.innerHTML = `
+            <h1>${translations[lang].changePassword}</h1>
+            <form>
+                <label>Current Password: <input type="password"></label><br>
+                <label>New Password: <input type="password"></label><br>
+                <label>Confirm Password: <input type="password"></label><br>
+                <button>Change Password</button>
+            </form>`;
+            break;
+        case 'logs':
+            content.innerHTML = `
+            <h1>${translations[lang].logs}</h1>
+            <table class="table">
+                <tr><th>Date</th><th>IP
