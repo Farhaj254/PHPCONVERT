@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+        }
+        nav a {
+            color: #fff;
+            margin-right: 1em;
+            text-decoration: none;
+        }
+        .content {
+            padding: 2em;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" onclick="loadPage('account')">Account</a>
+    <a href="#" onclick="loadPage('login')">Login</a>
+    <a href="#" onclick="loadPage('contact')">Contact</a>
+    <a href="#" onclick="loadPage('register')">Register</a>
+    <a href="#" onclick="loadPage('password')">Forgot Password</a>
+    <a href="#" onclick="loadPage('email_verify')">Email Verify</a>
+</nav>
+
+<div class="content" id="content">
+    <h1>Welcome to the Game Portal</h1>
+    <p>Select an option from the navigation menu.</p>
+</div>
+
+<script>
+    function loadPage(page) {
+        const content = document.getElementById('content');
+        switch (page) {
+            case 'account':
+                content.innerHTML = '<h1>Account Page</h1><p>Manage your account settings here.</p>';
+                break;
+            case 'login':
+                content.innerHTML = '<h1>Login Page</h1><p>Log in to your account here.</p>';
+                break;
+            case 'contact':
+                content.innerHTML = '<h1>Contact Page</h1><p>Get in touch with us here.</p>';
+                break;
+            case 'register':
+                content.innerHTML = '<h1>Register Page</h1><p>Create a new account here.</p>';
+                break;
+            case 'password':
+                content.innerHTML = '<h1>Password Recovery</h1><p>Recover your password here.</p>';
+                break;
+            case 'email_verify':
+                content.innerHTML = '<h1>Email Verification</h1><p>Verify your email here.</p>';
+                break;
+            default:
+                content.innerHTML = '<h1>Welcome to the Game Portal</h1><p>Select an option from the navigation menu.</p>';
+        }
+    }
+</script>
+
+</body>
+</html>
