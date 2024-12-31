@@ -92,6 +92,7 @@ nav a {
     <a href="#" onclick="loadPage('payments')">Payments</a>
     <a href="#" onclick="loadPage('docs')">Docs</a>
     <a href="#" onclick="loadPage('certs')">Update Certs</a>
+    <a href="#" onclick="loadPage('admin')">Admin</a>
     <select class="language-select" id="language" onchange="changeLanguage()">
         <option value="en">English</option>
         <!-- Additional languages can be added here -->
@@ -122,6 +123,7 @@ const translations = {
         payments: "Payments",
         docs: "Documentation",
         certs: "Update Certificates",
+        admin: "Admin Panel",
         twoFA: "Two-Factor Authentication",
         changePassword: "Change Password",
         logs: "Logs",
@@ -183,28 +185,22 @@ function loadPage(page) {
             <button onclick="updateCerts()">Update Certificates</button>
             <div id="cert-result" style="margin-top:20px;"></div>`;
             break;
+        case 'admin':
+            content.innerHTML = `
+            <h1>${translations[lang].admin}</h1>
+            <p>Welcome to the Admin Panel. Use the options below to manage the portal:</p>
+            <ul>
+                <li><a href="#" onclick="viewAdmin('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="viewAdmin('games')">Manage Games</a></li>
+                <li><a href="#" onclick="viewAdmin('categories')">Game Categories</a></li>
+                <li><a href="#" onclick="viewAdmin('users')">Manage Users</a></li>
+                <li><a href="#" onclick="viewAdmin('settings')">Portal Settings</a></li>
+                <li><a href="#" onclick="viewAdmin('logout')">Logout</a></li>
+            </ul>`;
+            break;
         case '2fa':
             content.innerHTML = `
             <h1>${translations[lang].twoFA}</h1>
             <p>Enable or disable two-factor authentication for added security.</p>
             <form>
-                <label>Enable 2FA: <input type="checkbox"></label><br>
-                <label>Disable 2FA: <input type="checkbox"></label><br>
-                <button>Save Changes</button>
-            </form>`;
-            break;
-        case 'change_password':
-            content.innerHTML = `
-            <h1>${translations[lang].changePassword}</h1>
-            <form>
-                <label>Current Password: <input type="password"></label><br>
-                <label>New Password: <input type="password"></label><br>
-                <label>Confirm Password: <input type="password"></label><br>
-                <button>Change Password</button>
-            </form>`;
-            break;
-        case 'logs':
-            content.innerHTML = `
-            <h1>${translations[lang].logs}</h1>
-            <table class="table">
-                <tr><th>Date</th><th>IP
+                <label>Enable
